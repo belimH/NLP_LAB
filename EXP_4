@@ -61,6 +61,7 @@ for root, forms in generated_forms.items():
     print(f"  '{root}' (base form) -> {', '.join(forms)}")
 
 
+print("HAMZAH BELIM. UIN 231A014")
 print("\n--- Summary of Findings ---")
 print("Observation:")
 print("  'walk' can have different word forms based on morphological rules.")
@@ -78,4 +79,3 @@ all_generated_forms = set()
 for forms in generated_forms.values():
     all_generated_forms.update(forms)
 print(f"Generated Word Forms: {', '.join(sorted(list(all_generated_forms)))}")
-
