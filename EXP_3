@@ -1,0 +1,131 @@
+text='''Hey everyone!!! 👋
+
+I'm REALLY excited 😊 because I've just completed my first Machine Learning project on 23rd July, 2026. The project analyzed over 12,500 customer reviews collected from https://www.example.com and another dataset downloaded from www.kaggle.com.
+
+Unfortunately, some reviews weren't useful—they contained only words like "the", "is", "and", "of", "to", etc. Others had strange symbols such as @#$%^&*, repeated punctuation!!!!!!, HTML tags like <br>, and emojis 😂😂😂.
+
+You can contact me at vijay.shanker@eng.rizvi.edu.in or support123@company.co.in if you'd like the dataset. Follow us on Twitter @AI_ResearchLab and use hashtags like #MachineLearning #NLP #DataScience.
+
+The model's accuracy increased from 82.5% to 91.8%, while the training time decreased by nearly 35%. It processed 1,25,000 records in less than 2.5 hours and consumed around 3.7 GB of RAM.
+
+Students were studying, analyzing, processing, predicting, running, writing, and comparing different algorithms. The researchers discovered better techniques after performing extensive experiments and evaluating multiple models.
+
+Don't worry if the results aren't perfect—you're learning! Let's improve them together. I'll upload the final report by 30/07/2026.
+
+Thanks!!!'''
+
+#To convert text to lowercase
+
+print("Belim Hamzah", "UIN: 231A014\n")
+
+print(text.lower())
+text_lower = text.lower()
+print("Belim Hamzah", "UIN: 231A014\n")
+
+import re
+pattern=r'https?://www\.\S+|www\.\S+ | \S\@\S+'
+text_url = re.sub(pattern," ", text_lower)
+print(text_url)
+pattern=r'https?://www\.\S+ |www\.\S+|\S+\@\S+'
+text_emails = re.sub(pattern," ", text_lower)
+print(text_emails)
+pattern=r'\d+\S+'
+text_percentage = re.sub(pattern," ", text_emails)
+print(text_percentage)
+!pip install emoji
+import emoji
+
+text_emoji=emoji.replace_emoji(text_percentage, replace="")
+print(text_emoji)
+
+import nltk
+nltk.download('punkt_tab')
+
+
+from nltk import word_tokenize
+tokenized = word_tokenize(text_emoji)
+print("Tokenized words",tokenized)
+
+print("Belim Hamzah", "UIN: 231A014\n")
+import string
+punctuation=list(string. punctuation)
+print(punctuation)
+
+print("Belim Hamzah", "UIN: 231A014\n")
+print("With punctuation:",tokenized)
+print()
+text_punct=[]
+for word in tokenized:
+  if word not in punctuation:
+    text_punct. append(word)
+print("Without punctuation:", text_punct)
+
+print("Belim hamzah", "UIN: 231A014\n")
+
+import nltk
+nltk.download("stopwords")
+from nltk.corpus import stopwords
+
+print((stopwords.words("english")))
+
+
+print("Belim Hamzah", "UIN: 231A014\n")
+text_clean2=[]
+for word in text_punct:
+  if word not in stopwords.words("english"):
+    text_clean2.append(word.lower())
+print(text_clean2)
+
+from nltk.stem import PorterStemmer
+stemmer=PorterStemmer()
+print([stemmer. stem(word) for word in text_clean2])
+
+
+print("Belim Hamzah", "UIN: 231A014\n")
+import nltk
+nltk.download('wordnet')
+from nltk.stem import WordNetLemmatizer
+lemmatizer = WordNetLemmatizer()
+lemmatized_words = [lemmatizer.lemmatize(word) for word in text_clean2]
+print("Lemmatized words:", lemmatized_words)
+
+
+print("Belim Hamzah", "UIN: 231A014\n")
+
+# Token counts
+tokens_before_stop_words = len(text_punct)
+tokens_after_stop_words = len(text_clean2)
+tokens_after_lemmatization = len(lemmatized_words) 
+
+print(f"Number of tokens before stop word removal (after punctuation): {tokens_before_stop_words}")
+print(f"Number of tokens after stop word removal: {tokens_after_stop_words}")
+print(f"Number of tokens after lemmatization: {tokens_after_lemmatization}")
+print("-" * 30)
+
+# Vocabulary size (unique words)
+vocab_before_stop_words = len(set(text_punct))
+vocab_after_stop_words = len(set(text_clean2))
+vocab_after_lemmatization = len(set(lemmatized_words))
+
+print(f"Vocabulary size before stop word removal (after punctuation): {vocab_before_stop_words}")
+print(f"Vocabulary size after stop word removal: {vocab_after_stop_words}")
+print(f"Vocabulary size after lemmatization: {vocab_after_lemmatization}")
+print("-" * 30)
+
+# Comparison of stemmed vs. lemmatized outputs
+# Stemmed output from previous cell Ey14QnkMNtSL. Re-generating for direct comparison here.
+stemmed_words = [stemmer.stem(word) for word in text_clean2]
+print("Stemmed words (re-generated for comparison):", stemmed_words)
+print("\nLemmatized words:", lemmatized_words)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Assessment of Preprocessing Impact
+From the analysis, we can observe:
+
+Reduction in Token Count: Stop word removal significantly reduces the total number of tokens, focusing the text on more meaningful words. Lemmatization also contributes to this by reducing different forms of a word to a single base form.
+Reduction in Vocabulary Size: Both stop word removal and lemmatization effectively reduce the vocabulary size, which is beneficial for downstream tasks as it lowers dimensionality.
+Stemming vs. Lemmatization:
+Stemming (e.g., using Porter Stemmer) is a heuristic process that chops off suffixes from words, often resulting in words that are not actual dictionary words (e.g., 'analyz', 'comput'). It is faster but less accurate.
+Lemmatization (e.g., using WordNet Lemmatizer) is a more sophisticated process that uses vocabulary and morphological analysis to return the base or dictionary form of a word (e.g., 'analyze', 'compute'). It is generally more accurate but computationally more intensive.
+The choice between stemming and lemmatization depends on the specific NLP task and the desired trade-off between speed and accuracy. Lemmatization is often preferred when grammatical correctness and semantic meaning are important.
+
